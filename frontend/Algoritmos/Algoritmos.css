@@ -30,13 +30,12 @@ body {
 
 .navbar nav {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 20px;
-    height: 60px;
+    height: 80px;
 }
 
 .desktop-nav {
@@ -45,7 +44,6 @@ body {
     height: 100%;
 }
 
-/* Ajuste para el botón Inicio, eliminando cualquier posible margen extra */
 .desktop-nav .nav-item {
     color: var(--color-text);
     text-decoration: none;
@@ -54,8 +52,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: larger;
     height: 100%;
-    padding: 0 10px; /* Asegura un padding consistente */
+    padding: 0 10px;
 }
 
 .desktop-nav .nav-item:hover {
@@ -81,7 +80,7 @@ body {
     flex-direction: column;
     width: 100%;
     position: absolute;
-    top: 60px;
+    top: 80px;
     left: 0;
     background-color: var(--color-lighter-grey);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -186,7 +185,7 @@ body {
     display: none;
     border-radius: 8px;
     background-color: #fff;
-    padding: 20px; /* Añadido padding general para el info-panel */
+    padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
@@ -203,7 +202,7 @@ body {
 
     .info-text {
         flex: 0 0 50%;
-        padding: 15px; /* Margen general para el texto de información */
+        padding: 15px;
         overflow-y: auto;
         height: 100%;
         font-size: 0.95em;
@@ -231,61 +230,61 @@ body {
         display: flex;
         flex-direction: column;
         border-left: 1px solid var(--color-lighter-grey);
-        padding-left: 15px; /* Mantener padding-left para la separación visual */
+        padding-left: 15px;
         height: 100%;
-        box-sizing: border-box; /* Crucial para evitar el desborde */
-        min-width: 0; /* Permite que el elemento se encoja más allá de su contenido si es necesario */
+        box-sizing: border-box;
+        min-width: 0;
     }
 
     .code-area {
         background-color: var(--color-dark-blue);
         color: #f8f8f2;
-        padding: 15px; /* Margen general para el código */
+        padding: 15px;
         border-radius: 5px;
         margin-bottom: 0;
-        overflow-x: auto; /* Asegura el scroll horizontal */
+        overflow-x: auto;
         overflow-y: auto;
         height: 70%;
         font-family: 'Courier New', Courier, monospace;
         font-size: 0.9em;
-        box-sizing: border-box; /* Crucial para evitar el desborde */
-        min-width: 0; /* Permite que el elemento se encoja */
+        box-sizing: border-box;
+        min-width: 0;
     }
 
     .console {
         background-color: #000;
         color: #0f0;
-        padding: 15px; /* Margen general para la pseudoconsola */
+        padding: 15px;
         border-radius: 5px;
         display: flex;
         flex-direction: column;
         font-family: 'Courier New', Courier, monospace;
         font-size: 0.9em;
         overflow-y: auto;
-        overflow-x: auto; /* Asegura el scroll horizontal */
+        overflow-x: auto;
         height: 30%;
         margin-top: 10px;
-        box-sizing: border-box; /* Crucial para evitar el desborde */
-        min-width: 0; /* Permite que el elemento se encoja */
+        box-sizing: border-box;
+        min-width: 0;
     }
 
     .console .input-area {
-        display: flex; /* Para alinear el '>' y el input */
+        display: flex;
         align-items: center;
         margin-top: 10px;
     }
 
     .console .prompt {
-        white-space: pre; /* Asegura que el espacio después del '>' se mantenga */
+        white-space: pre;
     }
 
     .console-input {
         background-color: transparent;
         color: #0f0;
-        flex-grow: 1; /* Permite que el input ocupe el espacio restante */
+        flex-grow: 1;
         border: none;
         outline: none;
-        padding: 0; /* Resetear padding del input para controlarlo mejor */
+        padding: 0;
     }
 
     .tabs {
@@ -315,7 +314,14 @@ body {
 
 @media (max-width: 768px) {
     .navbar nav {
-        padding: 0 10px;
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+        position: relative;
+    }
+
+    .navbar nav.expanded {
+        padding-bottom: 10px;
     }
 
     .desktop-nav {
@@ -323,18 +329,51 @@ body {
     }
 
     .mobile-nav-toggle {
-        display: block;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        width: 100%;
+        height: 70px; 
+        text-align: center;
+        padding: 0; 
+        position: relative;
+        order: -1;
+        font-size: 48px;
+        z-index: 1001;
     }
 
-    .navbar nav {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 0;
-        height: auto;
+    .mobile-nav-toggle .icon-up,
+    .mobile-nav-toggle .icon-down {
+        display: none;
+    }
+
+    .mobile-nav-toggle::before {
+        content: 'V';
+        display: block;
+        font-size: 32px; 
+    }
+
+    .mobile-nav-toggle.active::before {
+        content: '^';
+        font-size: 48px;
+    }
+
+    .mobile-nav-menu {
+        position: static;
+        box-shadow: none;
     }
 
     .mobile-nav-menu.show {
         display: flex;
+        flex-direction: column;
+        width: 100%;
+        order: 0;
+    }
+
+    .mobile-nav-menu .nav-item {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
     }
 
     .tabs {
@@ -351,7 +390,7 @@ body {
 
     .info-panel {
         flex-direction: column;
-        padding: 15px; /* Padding general para el info-panel en móvil */
+        padding: 15px; 
         height: auto;
     }
 
@@ -360,7 +399,7 @@ body {
     }
 
     .info-text {
-        padding: 15px; /* Margen general para el texto de información en móvil */
+        padding: 15px; 
         margin-bottom: 20px;
         border-right: none;
         height: auto;
@@ -391,7 +430,7 @@ body {
         flex-grow: 0;
         background-color: var(--color-dark-blue);
         color: #f8f8f2;
-        padding: 15px; /* Margen general para código y consola en móvil */
+        padding: 15px; 
         box-sizing: border-box;
         min-width: 0;
     }
@@ -402,7 +441,7 @@ body {
     }
 
     .console .input-area {
-        display: flex; /* Para alinear el '>' y el input */
+        display: flex;
         align-items: center;
         margin-top: 10px;
     }
@@ -419,20 +458,4 @@ body {
         outline: none;
         padding: 0;
     }
-}
-
-.mobile-nav-toggle .icon-up {
-    display: block;
-}
-
-.mobile-nav-toggle .icon-down {
-    display: none;
-}
-
-.mobile-nav-toggle.active .icon-up {
-    display: none;
-}
-
-.mobile-nav-toggle.active .icon-down {
-    display: block;
 }
