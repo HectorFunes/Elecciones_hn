@@ -3,575 +3,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sección Informativa sobre Algoritmos</title>
+    <title>Algoritmos</title>
     <link rel="stylesheet" href="Algoritmos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <header class="navbar">
+        <nav>
+            <div class="desktop-nav">
+                <a href="#" class="nav-item">Inicio</a>
+                <a href="#" class="nav-item">Proceso de votación</a>
+                <a href="#" class="nav-item">Preguntas frecuentes</a>
+                <a href="#" class="nav-item active">Algoritmos</a>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Proceso de votación</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Preguntas frecuentes</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">Algoritmos</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+            <div class="mobile-nav-toggle">
+                <span class="icon-up">&#8964;</span>
+                <span class="icon-down" style="display: none;">&#8963;</span>
+            </div>
+            <div class="mobile-nav-menu">
+                <a href="#" class="nav-item">Inicio</a>
+                <a href="#" class="nav-item">Proceso de votación</a>
+                <a href="#" class="nav-item">Preguntas frecuentes</a>
+                <a href="#" class="nav-item active">Algoritmos</a>
+            </div>
+        </nav>
+    </header>
 
-    <main class="main-content">
-        <h1 class="page-title">Sección Informativa sobre Algoritmos</h1>
-        <p class="page-description">Aquí puedes ver distintos algoritmos, desde sus conceptos, hasta el código e incluso ejecutarlos.</p>
+    <main class="container">
+        <h1>Sección Informativa sobre Algoritmos</h1>
+        <p>Aquí puedes ver distintos algoritmos, desde sus conceptos, hasta el código e incluso ejecutarlos.</p>
 
-        <div class="algorithm-container">
+        <div class="algorithm-section">
             <div class="tabs">
                 <button class="tab-button active" data-tab="avestruz">Algoritmo del Avestruz</button>
-                <button class="tab-button" data-tab="banquero-simple">Algoritmo del Banquero (Recurso Único)</button>
-                <button class="tab-button" data-tab="banquero-multi">Algoritmo del Banquero (Múltiples Recursos)</button>
-                <button class="tab-button" data-tab="filosofos">Los Filósofos Comelones</button>
-                <button class="tab-button" data-tab="lectores">Problema de los Lectores Escritores</button>
-                <button class="tab-button" data-tab="barbero">Problema del Barbero Durmiente</button>
+                <button class="tab-button" data-tab="banquero-un-recurso">Algoritmo del Banquero (un Recurso)</button>
+                <button class="tab-button" data-tab="banquero-varios-recursos">Algoritmo del Banquero (varios Recursos)</button>
+                <button class="tab-button" data-tab="filosofos">Problema de los Filósofos</button>
+                <button class="tab-button" data-tab="lectores-escritores">Problema de Lectores Escritores</button>
+                <button class="tab-button" data-tab="barbero-durmiente">Problema del Barbero Durmiente</button>
             </div>
 
-            <div class="content-area">
-                <div class="tab-content active" id="avestruz">
-                    <div class="content-left">
+            <div class="tab-content">
+                <div class="info-panel active" id="avestruz-content">
+                    <div class="info-text">
                         <h3>Algoritmo del Avestruz</h3>
-                        <p>El algoritmo del avestruz no es realmente un algoritmo en el sentido tradicional, sino más bien una estrategia o enfoque de diseño de sistemas. Se llama así en forma irónica, haciendo alusión al mito de que los avestruces entierran la cabeza en la arena cuando tienen miedo: es decir, ignorar un problema con la esperanza de que nunca ocurra.</p>
-                        
-                        <p>Consiste en ignorar intencionalmente condiciones de carrera o errores poco frecuentes en sistemas concurrentes o distribuidos, bajo la suposición de que:</p>
+                        <p>El Algoritmo del Avestruz no es realmente un algoritmo en el sentido tradicional, sino más bien una estrategia o enfoque de diseño de sistemas. Su nombre es una alusión irónica al comportamiento de las avestruces de enterrar la cabeza en la arena para ignorar un problema con la esperanza de que nunca ocurra. Propuesto por <strong>Andrew Tanenbaum</strong> como una metáfora para ciertas estrategias en la gestión de errores y concurrencia.</p>
+                        <p><strong>¿Qué es?</strong> Consiste en ignorar intencionalmente condiciones de carrera o errores poco frecuentes en sistemas concurrentes o distribuidos. Se basa en la suposición de que:</p>
                         <ul>
-                            <li>Son raros</li>
-                            <li>El costo de manejarlos supera el beneficio</li>
-                            <li>El sistema puede tolerar sus efectos ocasionales</li>
+                            <li>Son raros.</li>
+                            <li>El costo de manejarlos supera el beneficio.</li>
+                            <li>El sistema puede tolerar sus efectos ocasionales.</li>
                         </ul>
-                        
-                        <p>Este enfoque se usa cuando los errores son tan infrecuentes que es más económico dejarlos pasar que invertir recursos significativos en prevenirlos.</p>
+                        <p><strong>¿Cómo funciona?</strong> En lugar de implementar mecanismos complejos de sincronización o detección de errores para cada posible problema, se asume que ciertos fallos son tan infrecuentes o sus consecuencias tan menores que es más eficiente simplemente ignorarlos. Se aplica en situaciones donde la detección y corrección de un error es más costosa o compleja que el propio error.</p>
+                        <p><strong>Características:</strong> Simplicidad, bajo overhead. <strong>Restricciones:</strong> No es adecuado para sistemas donde la confiabilidad es crítica o donde los errores pueden tener consecuencias graves.</p>
                     </div>
-                    <div class="content-right">
-                        <div class="code-container">
-                            <pre><code id="code-avestruz">// Ejemplo de "Algoritmo del Avestruz" - Ignorar condiciones de carrera
-let counter = 0;
-
-function increment() {
-    for (let i = 0; i < 1000; i++) {
-        counter++;
+                    <div class="code-console-wrapper">
+                        <div class="code-area">
+                            <pre><code class="language-javascript">
+// Algoritmo del Avestruz (simulación)
+function runOstrichAlgorithm() {
+    let data = 0;
+    try {
+        if (Math.random() < 0.1) { 
+            throw new Error("Error poco frecuente ocurrido.");
+        }
+        data = 100 / (Math.random() > 0.5 ? 1 : 0);
+        return `Operación completada, resultado: ${data}`;
+    } catch (e) {
+        return "Un error ocurrió, pero fue ignorado (Algoritmo del Avestruz).";
     }
 }
-
-function simulateRaceCondition() {
-    counter = 0;
-    
-    increment();
-    increment();
-    increment();
-    
-    return `Valor final del contador: ${counter}`;
-}</code></pre>
+                            </code></pre>
                         </div>
-                        <div class="console" id="console-avestruz">
-                            <div class="console-header">Consola</div>
-                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
-                            <div class="console-input-container">
-                                <span>$</span>
-                                <input type="text" class="console-input" data-target="avestruz" placeholder="Escribe /run o /clear">
+                        <div class="console">
+                            <div class="output" id="avestruz-output"></div>
+                            <div class="input-area">
+                                <span class="prompt">> </span><input type="text" class="console-input" data-target="avestruz-output" data-algorithm="avestruz">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="tab-content" id="banquero-simple">
-                    <div class="content-left">
-                        <h3>Algoritmo del Banquero (Recurso Único)</h3>
-                        <p>El algoritmo del banquero es una técnica de prevención de interbloqueos desarrollada por Edsger Dijkstra. Su nombre proviene de la analogía con un banquero que debe decidir si otorgar préstamos a clientes basándose en si podrá recuperar el dinero.</p>
-                        
-                        <p>El algoritmo funciona manteniendo el sistema en un "estado seguro", donde existe al menos una secuencia de ejecución que permite que todos los procesos terminen sin interbloqueo.</p>
-                        
-                        <p><strong>Para un solo recurso:</strong> Se verifica si otorgar el recurso mantiene el sistema en estado seguro. Es una versión simplificada donde solo hay una cantidad total de un tipo de recurso.</p>
-                        
-                        <p>Es conservador pero efectivo para prevenir interbloqueos en sistemas con recursos limitados.</p>
+                <div class="info-panel" id="banquero-un-recurso-content">
+                    <div class="info-text">
+                        <h3>Algoritmo del Banquero para un solo Recurso</h3>
+                        <p>El Algoritmo del Banquero es un algoritmo de prevención de interbloqueos (deadlock) y fue propuesto por <strong>Edsger W. Dijkstra</strong>. Se utiliza en sistemas operativos para asignar recursos de forma segura a múltiples procesos, evitando situaciones de interbloqueo.</p>
+                        <p><strong>¿Qué es?</strong> Es un algoritmo que evalúa las solicitudes de recursos de los procesos para garantizar que el sistema siempre permanezca en un "estado seguro", es decir, un estado desde el cual se puede evitar el interbloqueo.</p>
+                        <p><strong>¿Cómo funciona?</strong> Para un solo tipo de recurso, el algoritmo mantiene un registro de la cantidad total de ese recurso disponible, la cantidad asignada a cada proceso y la cantidad máxima que cada proceso puede solicitar. Cuando un proceso solicita recursos, el algoritmo verifica si la concesión de esa solicitud llevaría al sistema a un estado inseguro. Si es así, la solicitud se retrasa hasta que sea seguro concederla. Si es seguro, se concede.</p>
+                        <p><strong>Características:</strong> Previene interbloqueos. <strong>Restricciones:</strong> Requiere que los procesos declaren su necesidad máxima de recursos por adelantado. Puede ser ineficiente si los procesos solicitan y liberan recursos constantemente.</p>
                     </div>
-                    <div class="content-right">
-                        <div class="code-container">
-                            <pre><code id="code-banquero-simple">// Algoritmo del Banquero - Versión simplificada para un recurso
-class BankerAlgorithmSimple {
-    constructor(totalResources) {
-        this.total = totalResources;
-        this.allocated = []; // Recursos asignados a cada proceso
-        this.max = [];       // Máximo de recursos que cada proceso necesita
-        this.available = totalResources; // Recursos disponibles
-    }
-    
-    addProcess(allocated, max) {
-        this.allocated.push(allocated);
-        this.max.push(max);
-        this.available -= allocated; // Reducir disponibles por lo ya asignado
-    }
-    
-    isSafeState() {
-        let work = this.available;
-        let finish = new Array(this.allocated.length).fill(false);
-        let safeSequence = [];
-        
-        let found = true;
-        while (found) {
-            found = false;
-            for (let i = 0; i < this.allocated.length; i++) {
-                // Si el proceso no ha terminado y su necesidad es menor o igual a 'work'
-                if (!finish[i] && (this.max[i] - this.allocated[i]) <= work) {
-                    work += this.allocated[i]; // Liberar recursos
-                    finish[i] = true;
-                    safeSequence.push(i);
-                    found = true;
-                }
-            }
-        }
-        
-        // Si todos los procesos terminaron, el estado es seguro
-        return finish.every(f => f) ? safeSequence : null;
-    }
-}
+                    <div class="code-console-wrapper">
+                        <div class="code-area">
+                            <pre><code class="language-javascript">
+// Algoritmo del Banquero (un recurso - simulación)
+function runBankerSingleResource() {
+    let totalResources = 10;
+    let availableResources = 10;
+    let maxNeeds = { P1: 5, P2: 4, P3: 6 };
+    let allocated = { P1: 0, P2: 0, P3: 0 };
+    let output = [];
 
-function runBankerSimpleExample() {
-    let banker = new BankerAlgorithmSimple(10); // Total de 10 unidades de recurso
-    banker.addProcess(2, 5);  // Proceso 0: asignado 2, máximo 5 (necesita 3 más)
-    banker.addProcess(3, 6);  // Proceso 1: asignado 3, máximo 6 (necesita 3 más)
-    banker.addProcess(1, 3);  // Proceso 2: asignado 1, máximo 3 (necesita 2 más)
-    
-    let sequence = banker.isSafeState();
-    return sequence ? 
-        `Estado seguro encontrado. Secuencia: ${sequence.join(' -> ')}` :
-        'Estado inseguro detectado';
-}</code></pre>
+    function requestResources(process, amount) {
+        output.push(`\n${process} solicita ${amount} recurso(s).`);
+        if (amount > maxNeeds[process] - allocated[process]) {
+            output.push(`  Error: ${process} excede su necesidad máxima.`);
+            return false;
+        }
+        if (amount > availableResources) {
+            output.push(`  ${process} debe esperar: recursos insuficientes disponibles.`);
+            return false;
+        }
+
+        availableResources -= amount;
+        allocated[process] += amount;
+
+        output.push(`  Estado actual: Disponible=${availableResources}, Asignado: P1=${allocated.P1}, P2=${allocated.P2}, P3=${allocated.P3}`);
+
+        let isSafe = availableResources >= 0; 
+        output.push(`  ¿Es un estado seguro? ${isSafe ? 'Sí' : 'No'}`);
+        return isSafe;
+    }
+
+    output.push("Inicio de la simulación del Banquero (un recurso):");
+    requestResources('P1', 2);
+    requestResources('P2', 3);
+    requestResources('P3', 1);
+    requestResources('P1', 3);
+    requestResources('P2', 1);
+    requestResources('P3', 5);
+
+    return output.join('\n');
+}
+                            </code></pre>
                         </div>
-                        <div class="console" id="console-banquero-simple">
-                            <div class="console-header">Consola</div>
-                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
-                            <div class="console-input-container">
-                                <span>$</span>
-                                <input type="text" class="console-input" data-target="banquero-simple" placeholder="Escribe /run o /clear">
+                        <div class="console">
+                            <div class="output" id="banquero-un-recurso-output"></div>
+                            <div class="input-area">
+                                <span class="prompt">> </span><input type="text" class="console-input" data-target="banquero-un-recurso-output" data-algorithm="banquero-un-recurso">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="tab-content" id="banquero-multi">
-                    <div class="content-left">
-                        <h3>Algoritmo del Banquero (Múltiples Recursos)</h3>
-                        <p>Esta es una extensión del algoritmo del banquero que maneja múltiples tipos de recursos, por ejemplo, A, B y C. Requiere un seguimiento más complejo de los recursos disponibles, asignados y las necesidades máximas de cada proceso.</p>
-                        
-                        <p><strong>Componentes clave:</strong></p>
-                        <ul>
-                            <li>**Available (Vector):** Número de instancias disponibles de cada tipo de recurso.</li>
-                            <li>**Max (Matriz):** Número máximo de instancias de cada recurso que cada proceso puede solicitar.</li>
-                            <li>**Allocation (Matriz):** Número de instancias de cada recurso actualmente asignadas a cada proceso.</li>
-                            <li>**Need (Matriz):** Número restante de instancias de cada recurso que cada proceso aún necesita. `Need[i][j] = Max[i][j] - Allocation[i][j]`.</li>
-                        </ul>
-                        
-                        <p>El algoritmo verifica si el sistema puede encontrar una secuencia segura de procesos para los cuales, si se les conceden sus recursos restantes, pueden completar sus tareas y liberar sus recursos, permitiendo que el siguiente proceso en la secuencia se complete, y así sucesivamente.</p>
-                        <p>Si existe al menos una secuencia segura, el estado es seguro; de lo contrario, es inseguro y se previene la asignación que conduciría a un interbloqueo.</p>
+                <div class="info-panel" id="banquero-varios-recursos-content">
+                    <div class="info-text">
+                        <h3>Algoritmo del Banquero para Varios Recursos</h3>
+                        <p>Esta es una extensión del Algoritmo del Banquero original de <strong>Edsger W. Dijkstra</strong>, aplicado a escenarios donde hay múltiples tipos de recursos, cada uno con una cantidad diferente.</p>
+                        <p><strong>¿Qué es?</strong> Es una generalización del algoritmo del banquero que permite la asignación segura de múltiples tipos de recursos a varios procesos, garantizando que el sistema nunca llegue a un estado de interbloqueo.</p>
+                        <p><strong>¿Cómo funciona?</strong> El algoritmo mantiene varias matrices para llevar el control: <code>Available</code> (recursos disponibles de cada tipo), <code>Max</code> (necesidad máxima de cada proceso para cada tipo de recurso), <code>Allocation</code> (recursos asignados actualmente a cada proceso de cada tipo) y <code>Need</code> (recursos adicionales que cada proceso aún necesita de cada tipo). Cuando un proceso solicita recursos, el algoritmo realiza una verificación de seguridad que intenta encontrar una secuencia de ejecución de procesos que permita a todos terminar, liberando sus recursos. Si se encuentra tal secuencia, la solicitud se concede; de lo contrario, se retrasa.</p>
+                        <p><strong>Características:</strong> Previene interbloqueos en sistemas con múltiples recursos. <strong>Restricciones:</strong> Es más complejo de implementar y computacionalmente más costoso que la versión de un solo recurso. También requiere la declaración previa de la necesidad máxima de recursos.</p>
                     </div>
-                    <div class="content-right">
-                        <div class="code-container">
-                            <pre><code id="code-banquero-multi">// Algoritmo del Banquero - Múltiples Recursos
-class BankerAlgorithmMulti {
-    constructor(available, max, allocation) {
-        this.available = [...available]; // Vector de recursos disponibles
-        this.max = max;                   // Matriz Max (proceso x recurso)
-        this.allocation = allocation;     // Matriz Allocation (proceso x recurso)
-        this.numProcesses = max.length;
-        this.numResources = available.length;
-        this.need = this.calculateNeed(); // Matriz Need
-        this.log = [];
-    }
-
-    calculateNeed() {
-        let need = [];
-        for (let i = 0; i < this.numProcesses; i++) {
-            need[i] = [];
-            for (let j = 0; j < this.numResources; j++) {
-                need[i][j] = this.max[i][j] - this.allocation[i][j];
-            }
-        }
-        return need;
-    }
-
-    isSafeState() {
-        let work = [...this.available];
-        let finish = new Array(this.numProcesses).fill(false);
-        let safeSequence = [];
-
-        let count = 0;
-        while (count < this.numProcesses) {
-            let found = false;
-            for (let p = 0; p < this.numProcesses; p++) {
-                if (!finish[p]) {
-                    let canExecute = true;
-                    for (let r = 0; r < this.numResources; r++) {
-                        if (this.need[p][r] > work[r]) {
-                            canExecute = false;
-                            break;
-                        }
-                    }
-
-                    if (canExecute) {
-                        for (let r = 0; r < this.numResources; r++) {
-                            work[r] += this.allocation[p][r];
-                        }
-                        safeSequence.push(p);
-                        finish[p] = true;
-                        found = true;
-                        count++;
-                    }
-                }
-            }
-
-            if (!found) {
-                this.log.push("No se encontró una secuencia segura.");
-                return null;
-            }
-        }
-        this.log.push("Se encontró una secuencia segura.");
-        return safeSequence;
-    }
-
-    simulate() {
-        this.log = [];
-        this.log.push("Estado Inicial:");
-        this.log.push(`Available: [${this.available.join(', ')}]`);
-        this.log.push("Allocation:");
-        this.allocation.forEach((alloc, i) => this.log.push(`P${i}: [${alloc.join(', ')}]`));
-        this.log.push("Max:");
-        this.max.forEach((m, i) => this.log.push(`P${i}: [${m.join(', ')}]`));
-        this.log.push("Need:");
-        this.need.forEach((n, i) => this.log.push(`P${i}: [${n.join(', ')}]`));
-        
-        const sequence = this.isSafeState();
-        if (sequence) {
-            this.log.push(`Secuencia segura: P${sequence.join(' -> P')}`);
-        } else {
-            this.log.push("El sistema está en un estado inseguro.");
-        }
-        return this.log.join('\n');
-    }
-}
-
-function runBankerMultiExample() {
-    // Ejemplo de un sistema con 3 tipos de recursos (A, B, C)
-    // P0, P1, P2 son procesos
-    const available = [3, 3, 2]; // Instancias disponibles de A, B, C
-
-    const max = [ // Necesidades máximas de cada proceso
-        [7, 5, 3], // P0
-        [3, 2, 2], // P1
-        [9, 0, 2]  // P2
+                    <div class="code-console-wrapper">
+                        <div class="code-area">
+                            <pre><code class="language-javascript">
+// Algoritmo del Banquero (varios recursos - simulación)
+function runBankerMultiResource() {
+    let available = [3, 3, 2];
+    let max = [
+        [7, 5, 3],
+        [3, 2, 2],
+        [9, 0, 2]
     ];
-
-    const allocation = [ // Recursos actualmente asignados a cada proceso
-        [0, 1, 0], // P0
-        [2, 0, 0], // P1
-        [3, 0, 2]  // P2
+    let allocation = [
+        [0, 1, 0],
+        [2, 0, 0],
+        [3, 0, 2]
     ];
+    let need = [
+        [7, 4, 3],
+        [1, 2, 2],
+        [6, 0, 0]
+    ];
+    let output = [];
 
-    let banker = new BankerAlgorithmMulti(available, max, allocation);
-    return banker.simulate();
-}</code></pre>
+    output.push("Estado inicial:");
+    output.push(`  Available: [${available.join(', ')}]`);
+    output.push(`  Need: ${JSON.stringify(need)}`);
+    output.push(`  Allocation: ${JSON.stringify(allocation)}`);
+
+    let isSystemSafe = true;
+
+    for (let i = 0; i < need.length; i++) {
+        for (let j = 0; j < available.length; j++) {
+            if (need[i][j] > (available[j] + allocation[i][j])) {
+                isSystemSafe = false;
+                break;
+            }
+        }
+        if (!isSystemSafe) break;
+    }
+
+    output.push(`\n¿Es el sistema un estado seguro (verificación básica)? ${isSystemSafe ? 'Sí' : 'No'}`);
+    output.push("  Nota: La verificación de seguridad completa es más compleja y busca una secuencia de ejecución.");
+    return output.join('\n');
+}
+                            </code></pre>
                         </div>
-                        <div class="console" id="console-banquero-multi">
-                            <div class="console-header">Consola</div>
-                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
-                            <div class="console-input-container">
-                                <span>$</span>
-                                <input type="text" class="console-input" data-target="banquero-multi" placeholder="Escribe /run o /clear">
+                        <div class="console">
+                            <div class="output" id="banquero-varios-recursos-output"></div>
+                            <div class="input-area">
+                                <span class="prompt">> </span><input type="text" class="console-input" data-target="banquero-varios-recursos-output" data-algorithm="banquero-varios-recursos">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="tab-content" id="filosofos">
-                    <div class="content-left">
+                <div class="info-panel" id="filosofos-content">
+                    <div class="info-text">
                         <h3>Problema de los Filósofos Comelones</h3>
-                        <p>Este es un problema clásico de sincronización propuesto por Dijkstra. Cinco filósofos se sientan alrededor de una mesa circular con un plato de espaguetis frente a cada uno y cinco tenedores entre ellos.</p>
-                        
-                        <p>Cada filósofo alterna entre pensar y comer. Para comer, necesita ambos tenedores adyacentes. El problema surge cuando todos los filósofos toman el tenedor de su izquierda simultáneamente, causando un interbloqueo.</p>
-                        
-                        <p><strong>Soluciones comunes:</strong></p>
-                        <ul>
-                            <li>Permitir que máximo 4 filósofos coman a la vez</li>
-                            <li>Filósofos impares toman primero tenedor izquierdo, pares el derecho</li>
-                            <li>Usar un semáforo para controlar el acceso a los tenedores</li>
-                        </ul>
-                        
-                        <p>Ilustra perfectamente los desafíos de la sincronización en sistemas concurrentes.</p>
+                        <p>Este es un problema clásico de concurrencia propuesto por <strong>Edsger W. Dijkstra</strong> para ilustrar problemas de sincronización en sistemas operativos, como el interbloqueo y la inanición (starvation).</p>
+                        <p><strong>¿Qué es?</strong> Describe un escenario donde cinco filósofos se sientan alrededor de una mesa, alternando entre pensar y comer. Hay cinco palillos, uno entre cada par de filósofos. Para comer, un filósofo necesita dos palillos: el de su izquierda y el de su derecha. El problema reside en diseñar un protocolo para que los filósofos puedan comer sin que ocurra un interbloqueo o inanición.</p>
+                        <p><strong>¿Cómo funciona?</strong> Si cada filósofo toma primero el palillo de su izquierda y luego intenta tomar el de su derecha, y todos lo hacen simultáneamente, todos tomarán un palillo y esperarán indefinidamente el segundo, resultando en un interbloqueo. Las soluciones suelen involucrar el uso de semáforos, monitores o restricciones en el orden de adquisición de recursos para evitar el interbloqueo y la inanición.</p>
+                        <p><strong>Características:</strong> Es un excelente ejemplo para estudiar interbloqueos y estrategias de sincronización. <strong>Restricciones:</strong> No es un algoritmo para ser implementado directamente, sino un modelo para comprender y resolver problemas de concurrencia.</p>
                     </div>
-                    <div class="content-right">
-                        <div class="code-container">
-                            <pre><code id="code-filosofos">// Problema de los Filósofos Comelones - Simulación
-class DiningPhilosophers {
-    constructor() {
-        this.forks = [true, true, true, true, true]; // true = disponible
-        this.philosophers = ['Aristóteles', 'Platón', 'Sócrates', 'Kant', 'Descartes'];
-        this.log = [];
-    }
-    
-    canEat(philosopher) {
-        let leftFork = philosopher;
-        let rightFork = (philosopher + 1) % 5;
-        return this.forks[leftFork] && this.forks[rightFork];
-    }
-    
-    eat(philosopher) {
-        if (this.canEat(philosopher)) {
-            let leftFork = philosopher;
-            let rightFork = (philosopher + 1) % 5;
-            
-            this.forks[leftFork] = false;
-            this.forks[rightFork] = false;
-            
-            this.log.push(`${this.philosophers[philosopher]} está comiendo`);
-            
-            setTimeout(() => {
-                this.forks[leftFork] = true;
-                this.forks[rightFork] = true;
-                this.log.push(`${this.philosophers[philosopher]} terminó de comer`);
-            }, 100);
-            
-            return true;
+                    <div class="code-console-wrapper">
+                        <div class="code-area">
+                            <pre><code class="language-javascript">
+// Problema de los Filósofos Comelones (simulación conceptual)
+function runPhilosophersProblem() {
+    let output = [];
+    const numPhilosophers = 5;
+    const chopsticks = Array(numPhilosophers).fill(true);
+    const philosopherStates = Array(numPhilosophers).fill('thinking');
+
+    function tryEat(philosopherId) {
+        const leftChopstick = philosopherId;
+        const rightChopstick = (philosopherId + 1) % numPhilosophers;
+
+        output.push(`Filósofo ${philosopherId} está ${philosopherStates[philosopherId]}.`);
+
+        if (philosopherStates[philosopherId] === 'hungry') {
+            if (chopsticks[leftChopstick] && chopsticks[rightChopstick]) {
+                chopsticks[leftChopstick] = false;
+                chopsticks[rightChopstick] = false;
+                philosopherStates[philosopherId] = 'eating';
+                output.push(`  Filósofo ${philosopherId} tomó los palillos y está comiendo.`);
+                return true;
+            } else {
+                output.push(`  Filósofo ${philosopherId} no pudo tomar ambos palillos, sigue hambriento.`);
+                return false;
+            }
         }
         return false;
     }
-    
-    simulate() {
-        this.log = [];
-        
-        for (let i = 0; i < 5; i++) {
-            if (!this.eat(i)) {
-                this.log.push(`${this.philosophers[i]} no puede comer (tenedores ocupados)`);
-            }
-        }
-        
-        return this.log.join('\n');
-    }
-}
 
-function runPhilosophersExample() {
-    let dining = new DiningPhilosophers();
-    return dining.simulate();
-}</code></pre>
-                        </div>
-                        <div class="console" id="console-filosofos">
-                            <div class="console-header">Consola</div>
-                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
-                            <div class="console-input-container">
-                                <span>$</span>
-                                <input type="text" class="console-input" data-target="filosofos" placeholder="Escribe /run o /clear">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    output.push("Inicio de la simulación de los Filósofos Comelones:");
 
-                <div class="tab-content" id="lectores">
-                    <div class="content-left">
-                        <h3>Problema de Lectores y Escritores</h3>
-                        <p>Este problema clásico de sincronización involucra múltiples procesos que acceden a un recurso compartido (como una base de datos). Los procesos se dividen en dos categorías:</p>
-                        
-                        <p><strong>Lectores:</strong> Solo leen el recurso, múltiples lectores pueden acceder simultáneamente sin problemas.</p>
-                        <p><strong>Escritores:</strong> Modifican el recurso, requieren acceso exclusivo (no pueden haber otros lectores o escritores).</p>
-                        
-                        <p><strong>Restricciones:</strong></p>
-                        <ul>
-                            <li>Múltiples lectores pueden leer simultáneamente</li>
-                            <li>Solo un escritor puede escribir a la vez</li>
-                            <li>No pueden haber lectores y escritores simultáneos</li>
-                        </ul>
-                        
-                        <p>Las soluciones varían en prioridad: prioridad a lectores, prioridad a escritores, o acceso justo.</p>
-                    </div>
-                    <div class="content-right">
-                        <div class="code-container">
-                            <pre><code id="code-lectores">// Problema de Lectores y Escritores
-class ReadersWriters {
-    constructor() {
-        this.readers = 0;
-        this.writing = false;
-        this.data = "Contenido inicial";
-        this.log = [];
+    for (let i = 0; i < numPhilosophers; i++) {
+        philosopherStates[i] = 'hungry';
     }
-    
-    startReading(readerId) {
-        if (!this.writing) {
-            this.readers++;
-            this.log.push(`Lector ${readerId} comenzó a leer. Lectores activos: ${this.readers}`);
-            this.log.push(`Lector ${readerId} lee: "${this.data}"`);
-            return true;
-        } else {
-            this.log.push(`Lector ${readerId} no puede leer (escritor activo)`);
-            return false;
-        }
-    }
-    
-    stopReading(readerId) {
-        if (this.readers > 0) {
-            this.readers--;
-            this.log.push(`Lector ${readerId} terminó de leer. Lectores activos: ${this.readers}`);
-        }
-    }
-    
-    startWriting(writerId, newData) {
-        if (this.readers === 0 && !this.writing) {
-            this.writing = true;
-            this.data = newData;
-            this.log.push(`Escritor ${writerId} escribió: "${newData}"`);
-            return true;
-        } else {
-            this.log.push(`Escritor ${writerId} no puede escribir (${this.readers} lectores o escritor activo)`);
-            return false;
-        }
-    }
-    
-    stopWriting(writerId) {
-        this.writing = false;
-        this.log.push(`Escritor ${writerId} terminó de escribir`);
-    }
-    
-    simulate() {
-        this.log = [];
-        
-        this.startReading(1);
-        this.startReading(2);
-        this.startWriting(1, "Nuevo contenido");
-        this.stopReading(1);
-        this.stopReading(2);
-        this.startWriting(1, "Contenido actualizado");
-        this.stopWriting(1);
-        this.startReading(3);
-        this.stopReading(3);
-        
-        return this.log.join('\n');
-    }
-}
 
-function runReadersWritersExample() {
-    let rw = new ReadersWriters();
-    return rw.simulate();
-}</code></pre>
-                        </div>
-                        <div class="console" id="console-lectores">
-                            <div class="console-header">Consola</div>
-                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
-                            <div class="console-input-container">
-                                <span>$</span>
-                                <input type="text" class="console-input" data-target="lectores" placeholder="Escribe /run o /clear">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="barbero">
-                    <div class="content-left">
-                        <h3>Problema del Barbero Durmiente</h3>
-                        <p>Este problema clásico de sincronización, propuesto por Dijkstra, describe una barbería con un barbero, una silla de barbero y varias sillas de espera.</p>
-                        
-                        <p><strong>Reglas del problema:</strong></p>
-                        <ul>
-                            <li>Si no hay clientes, el barbero duerme en su silla</li>
-                            <li>Cuando llega un cliente, debe despertar al barbero si está durmiendo</li>
-                            <li>Si el barbero está ocupado, el cliente espera (si hay sillas disponibles)</li>
-                            <li>Si no hay sillas de espera disponibles, el cliente se va</li>
-                        </ul>
-                        
-                        <p>El desafío está en la sincronización: evitar condiciones de carrera donde el barbero y el cliente se pierdan mutuamente, o donde se cuenten mal los clientes en espera.</p>
-                        
-                        <p>Se resuelve típicamente usando semáforos para controlar el acceso a las sillas y la comunicación barbero-cliente.</p>
-                    </div>
-                    <div class="content-right">
-                        <div class="code-container">
-                            <pre><code id="code-barbero">// Problema del Barbero Durmiente
-class SleepingBarber {
-    constructor(waitingChairs = 5) {
-        this.waitingChairs = waitingChairs;
-        this.waitingCustomers = [];
-        this.barberSleeping = true;
-        this.cuttingHair = false;
-        this.log = [];
-    }
-    
-    customerArrives(customerId) {
-        this.log.push(`Cliente ${customerId} llega a la barbería`);
-        
-        if (this.barberSleeping) {
-            this.barberSleeping = false;
-            this.cuttingHair = true;
-            this.log.push(`Cliente ${customerId} despierta al barbero y se sienta`);
-            this.cutHair(customerId);
-        } else if (this.waitingCustomers.length < this.waitingChairs) {
-            this.waitingCustomers.push(customerId);
-            this.log.push(`Cliente ${customerId} espera. Cola: ${this.waitingCustomers.length}/${this.waitingChairs}`);
-        } else {
-            this.log.push(`Cliente ${customerId} se va (no hay sillas disponibles)`);
-        }
-    }
-    
-    cutHair(customerId) {
-        this.log.push(`Barbero corta el cabello del cliente ${customerId}`);
-        
-        setTimeout(() => {
-            this.log.push(`Cliente ${customerId} terminó su corte`);
-            this.cuttingHair = false;
-            
-            if (this.waitingCustomers.length > 0) {
-                let nextCustomer = this.waitingCustomers.shift();
-                this.cuttingHair = true;
-                this.log.push(`Siguiente cliente ${nextCustomer} se sienta`);
-                this.cutHair(nextCustomer);
+    let ateCount = 0;
+    let attempts = 0;
+    while (ateCount < numPhilosophers && attempts < 10) { 
+        output.push(`\n--- Intento de ciclo ${attempts + 1} ---`);
+        ateCount = 0;
+        for (let i = 0; i < numPhilosophers; i++) {
+            if (philosopherStates[i] === 'hungry') {
+                if (tryEat(i)) {
+                    ateCount++;
+                }
+            } else if (philosopherStates[i] === 'eating') {
+                output.push(`  Filósofo ${i} sigue comiendo.`);
+                ateCount++;
             } else {
-                this.barberSleeping = true;
-                this.log.push(`Barbero se duerme (no hay más clientes)`);
+                output.push(`  Filósofo ${i} está pensando.`);
             }
-        }, 100);
+        }
+        attempts++;
     }
-    
-    simulate() {
-        this.log = [];
-        this.waitingCustomers = [];
-        this.barberSleeping = true;
-        this.cuttingHair = false;
-        
-        this.customerArrives(1);
-        this.customerArrives(2);
-        this.customerArrives(3);
-        this.customerArrives(4);
-        this.customerArrives(5);
-        this.customerArrives(6);
-        this.customerArrives(7);
-        
-        return this.log.join('\n');
-    }
-}
 
-function runBarberExample() {
-    let barber = new SleepingBarber(3);
-    return barber.simulate();
-}</code></pre>
+    if (ateCount < numPhilosophers) {
+        output.push("\nCondición de interbloqueo simulada: Algunos filósofos siguen hambrientos.");
+    } else {
+        output.push("\nSimulación completada: Todos los filósofos comieron.");
+    }
+    return output.join('\n');
+}
+                            </code></pre>
                         </div>
-                        <div class="console" id="console-barbero">
-                            <div class="console-header">Consola</div>
-                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
-                            <div class="console-input-container">
-                                <span>$</span>
-                                <input type="text" class="console-input" data-target="barbero" placeholder="Escribe /run o /clear">
+                        <div class="console">
+                            <div class="output" id="filosofos-output"></div>
+                            <div class="input-area">
+                                <span class="prompt">> </span><input type="text" class="console-input" data-target="filosofos-output" data-algorithm="filosofos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-panel" id="lectores-escritores-content">
+                    <div class="info-text">
+                        <h3>Problema de Lectores y Escritores</h3>
+                        <p>Este es otro problema clásico de sincronización en sistemas operativos, diseñado para explorar la concurrencia en el acceso a recursos compartidos. Fue formulado por <strong>P.J. Courtois, F. Heymans, y D.L. Parnas</strong>.</p>
+                        <p><strong>¿Qué es?</strong> Un problema donde varios procesos ("lectores") necesitan leer datos de una base de datos compartida y otros procesos ("escritores") necesitan escribir en ella. La regla es que múltiples lectores pueden acceder a la vez, pero solo un escritor puede acceder a la vez, y ningún lector puede acceder mientras un escritor está escribiendo.</p>
+                        <p><strong>¿Cómo funciona?</strong> Se utilizan semáforos o monitores para controlar el acceso a la base de datos. Existen varias soluciones, cada una con diferentes prioridades. La primera solución da prioridad a los lectores (nuevos lectores pueden entrar incluso si un escritor está esperando), mientras que la segunda da prioridad a los escritores (si un escritor está esperando, ningún nuevo lector puede entrar). Las soluciones más robustas buscan evitar tanto la inanición de lectores como de escritores.</p>
+                        <p><strong>Características:</strong> Ilustra cómo gestionar el acceso concurrente a datos compartidos. <strong>Restricciones:</strong> La implementación correcta es crucial para evitar interbloqueos, inanición o corrupción de datos. Priorizar un tipo de proceso puede llevar a la inanición del otro.</p>
+                    </div>
+                    <div class="code-console-wrapper">
+                        <div class="code-area">
+                            <pre><code class="language-javascript">
+// Problema de Lectores y Escritores (Prioridad a Lectores - simulación)
+function runReadersWritersProblem() {
+    let output = [];
+    let database = "Datos iniciales";
+    let readersReading = 0;
+    let writerActive = false;
+    let writerWaiting = false;
+
+    function acquireReadLock(readerId) {
+        if (writerActive || writerWaiting) {
+            output.push(`Lector ${readerId}: Esperando (escritor activo o esperando).`);
+            return false;
+        }
+        readersReading++;
+        output.push(`Lector ${readerId}: Acceso de lectura concedido. Lectores activos: ${readersReading}`);
+        return true;
+    }
+
+    function releaseReadLock(readerId) {
+        readersReading--;
+        output.push(`Lector ${readerId}: Lectura completada. Lectores activos: ${readersReading}`);
+    }
+
+    function acquireWriteLock(writerId) {
+        if (readersReading > 0 || writerActive) {
+            writerWaiting = true;
+            output.push(`Escritor ${writerId}: Esperando (lectores activos o otro escritor).`);
+            return false;
+        }
+        writerActive = true;
+        writerWaiting = false;
+        output.push(`Escritor ${writerId}: Acceso de escritura concedido.`);
+        return true;
+    }
+
+    function releaseWriteLock(writerId) {
+        writerActive = false;
+        output.push(`Escritor ${writerId}: Escritura completada.`);
+    }
+
+    output.push("Inicio de la simulación de Lectores-Escritores (Prioridad a Lectores):");
+
+    output.push("\n-- Escenario 1: Múltiples lectores acceden --");
+    if (acquireReadLock(1)) { database; releaseReadLock(1); }
+    if (acquireReadLock(2)) { database; releaseReadLock(2); }
+    if (acquireReadLock(3)) { database; releaseReadLock(3); }
+
+    output.push("\n-- Escenario 2: Escritor intenta acceder mientras hay lectores --");
+    acquireReadLock(4);
+    if (acquireWriteLock(1)) { database = "Nuevos datos"; releaseWriteLock(1); }
+    releaseReadLock(4);
+
+    output.push("\n-- Escenario 3: Escritor accede cuando no hay lectores --");
+    if (acquireWriteLock(2)) { database = "Más datos"; releaseWriteLock(2); }
+
+    output.push(`\nEstado final de la base de datos: "${database}"`);
+    return output.join('\n');
+}
+                            </code></pre>
+                        </div>
+                        <div class="console">
+                            <div class="output" id="lectores-escritores-output"></div>
+                            <div class="input-area">
+                                <span class="prompt">> </span><input type="text" class="console-input" data-target="lectores-escritores-output" data-algorithm="lectores-escritores">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-panel" id="barbero-durmiente-content">
+                    <div class="info-text">
+                        <h3>Problema del Barbero Durmiente</h3>
+                        <p>El Problema del Barbero Durmiente es un problema clásico de sincronización de procesos en sistemas operativos, que fue propuesto por <strong>Edsger W. Dijkstra</strong> y sirve para ilustrar los problemas de coordinación entre procesos.</p>
+                        <p><strong>¿Qué es?</strong> Describe una barbería con un barbero, una silla de barbero y varias sillas para clientes esperando. Si no hay clientes, el barbero se duerme. Cuando un cliente llega y el barbero está dormido, lo despierta. Si el barbero está ocupado, el cliente se sienta en una silla de espera (si hay espacio) o se va si no hay sillas disponibles.</p>
+                        <p><strong>¿Cómo funciona?</strong> Se utilizan semáforos para coordinar al barbero y a los clientes. Un semáforo para el barbero (dormido/despierto), uno para los clientes esperando, y otro para proteger el acceso a las sillas de espera. Los clientes incrementan un contador de espera y el barbero lo decrementa. Si el contador llega a cero, el barbero se duerme.</p>
+                        <p><strong>Características:</strong> Es un buen ejemplo para ilustrar la sincronización productor-consumidor. <strong>Restricciones:</strong> La implementación debe manejar correctamente las condiciones de carrera para el número de sillas de espera y la lógica de despertado/dormido del barbero.</p>
+                    </div>
+                    <div class="code-console-wrapper">
+                        <div class="code-area">
+                            <pre><code class="language-javascript">
+// Problema del Barbero Durmiente (simulación conceptual asíncrona)
+function runSleepingBarberProblem() {
+    let output = [];
+    const MAX_CHAIRS = 3;
+    let waitingCustomers = 0;
+    let barberSleeping = true;
+    let barberChairOccupied = false;
+
+    function simulateHaircut(customerId) {
+        return new Promise(resolve => {
+            barberChairOccupied = true;
+            output.push(`Barbero: Cortando el pelo al Cliente ${customerId}.`);
+            setTimeout(() => {
+                output.push(`Barbero: Terminé con Cliente ${customerId}.`);
+                barberChairOccupied = false;
+                resolve();
+            }, 50); 
+        });
+    }
+
+    async function barberLoop() {
+        for(let i = 0; i < 20; i++) { 
+            if (waitingCustomers > 0 && !barberChairOccupied) {
+                barberSleeping = false;
+                output.push(`Barbero: Un cliente espera. Clientes esperando: ${waitingCustomers}`);
+                const currentCustomer = "Cliente_" + (Math.random() * 100).toFixed(0); 
+                waitingCustomers--;
+                await simulateHaircut(currentCustomer);
+            } else if (waitingCustomers === 0 && !barberSleeping) {
+                barberSleeping = true;
+                output.push(`Barbero: No hay clientes, me voy a dormir.`);
+            }
+            await new Promise(resolve => setTimeout(resolve, 10)); 
+        }
+    }
+
+    output.push("Inicio de la simulación del Barbero Durmiente:");
+    
+    if (waitingCustomers === 0 && barberSleeping) {
+        output.push("Barbero: Esperando clientes (dormido).");
+    }
+
+    function customerArrives(id, delay) {
+        setTimeout(() => {
+            output.push(`\nCliente ${id} llega.`);
+            if (waitingCustomers < MAX_CHAIRS) {
+                waitingCustomers++;
+                output.push(`  Cliente ${id} se sienta en la sala de espera. Clientes esperando: ${waitingCustomers}`);
+                if (barberSleeping && !barberChairOccupied) {
+                    barberSleeping = false;
+                    output.push(`  Cliente ${id} despierta al barbero.`);
+                    barberLoop();
+                }
+            } else {
+                output.push(`  Sala de espera llena. Cliente ${id} se va.`);
+            }
+        }, delay);
+    }
+
+    customerArrives(1, 50);
+    customerArrives(2, 150);
+    customerArrives(3, 250);
+    customerArrives(4, 350); 
+    customerArrives(5, 450);
+
+    barberLoop(); 
+
+    return "Simulación asíncrona iniciada. La salida aparecerá con el tiempo.";
+}
+                            </code></pre>
+                        </div>
+                        <div class="console">
+                            <div class="output" id="barbero-durmiente-output"></div>
+                            <div class="input-area">
+                                <span class="prompt">> </span><input type="text" class="console-input" data-target="barbero-durmiente-output" data-algorithm="barbero-durmiente">
                             </div>
                         </div>
                     </div>
@@ -582,447 +467,10 @@ function runBarberExample() {
 
     <footer class="footer">
         <p>Heyden Aldana - Héctor Funes - Bilander Fernández</p>
-        <p>Copyright © todos los derechos reservados.</p>
-        <p>Este es un proyecto simulado y no corresponde al modelo actual del sistema de elecciones generales en Honduras</p>
+        <p>Copyright &copy; todos los derechos reservados.</p>
+        <p>Este es un proyecto simulado y no corresponde al modelo actual del sistema de elecciones generales en Honduras.</p>
     </footer>
 
-    <script>
-        // Navegación móvil
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenu.addEventListener('click', function() {
-            mobileMenu.classList.toggle('is-active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Sistema de pestañas
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const targetTab = this.getAttribute('data-tab');
-                
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-                
-                this.classList.add('active');
-                document.getElementById(targetTab).classList.add('active');
-
-                // Limpiar y resetear la consola al cambiar de pestaña
-                const currentConsoleInput = document.querySelector(`#console-${targetTab} .console-input`);
-                const currentConsoleOutput = document.querySelector(`#console-${targetTab} .console-output`);
-                if (currentConsoleOutput) {
-                    currentConsoleOutput.textContent = "Escribe /run para ejecutar el codigo, y presiona Enter.";
-                }
-                if (currentConsoleInput) {
-                    currentConsoleInput.value = "";
-                    currentConsoleInput.focus();
-                }
-            });
-        });
-
-        // Funcionalidad de la consola interactiva
-        document.querySelectorAll('.console-input').forEach(input => {
-            input.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    const command = this.value.trim();
-                    const algorithmId = this.dataset.target;
-                    const consoleOutput = document.querySelector(`#console-${algorithmId} .console-output`);
-                    
-                    if (command === '/run') {
-                        executeAlgorithmCode(algorithmId, consoleOutput);
-                    } else if (command === '/clear') {
-                        consoleOutput.textContent = "";
-                    } else {
-                        consoleOutput.textContent = "ERROR: comando no válido";
-                    }
-                    this.value = '';
-                }
-            });
-        });
-
-        function executeAlgorithmCode(algorithm, consoleOutputElement) {
-            try {
-                let result;
-                switch(algorithm) {
-                    case 'avestruz':
-                        result = simulateRaceCondition();
-                        break;
-                    case 'banquero-simple':
-                        result = runBankerSimpleExample();
-                        break;
-                    case 'banquero-multi':
-                        result = runBankerMultiExample();
-                        break;
-                    case 'filosofos':
-                        result = runPhilosophersExample();
-                        break;
-                    case 'lectores':
-                        result = runReadersWritersExample();
-                        break;
-                    case 'barbero':
-                        result = runBarberExample();
-                        break;
-                    default:
-                        result = 'Algoritmo no encontrado';
-                }
-                
-                consoleOutputElement.textContent = result;
-            } catch (error) {
-                consoleOutputElement.textContent = `Error al ejecutar: ${error.message}`;
-            }
-        }
-
-        let counter = 0;
-
-        function increment() {
-            for (let i = 0; i < 1000; i++) {
-                counter++;
-            }
-        }
-
-        function simulateRaceCondition() {
-            counter = 0;
-            increment();
-            increment();
-            increment();
-            return `Valor final del contador: ${counter}`;
-        }
-
-        class BankerAlgorithmSimple {
-            constructor(totalResources) {
-                this.total = totalResources;
-                this.allocated = [];
-                this.max = [];
-                this.available = totalResources;
-            }
-            
-            addProcess(allocated, max) {
-                this.allocated.push(allocated);
-                this.max.push(max);
-                this.available -= allocated;
-            }
-            
-            isSafeState() {
-                let work = this.available;
-                let finish = new Array(this.allocated.length).fill(false);
-                let safeSequence = [];
-                
-                let found = true;
-                while (found) {
-                    found = false;
-                    for (let i = 0; i < this.allocated.length; i++) {
-                        if (!finish[i] && (this.max[i] - this.allocated[i]) <= work) {
-                            work += this.allocated[i];
-                            finish[i] = true;
-                            safeSequence.push(i);
-                            found = true;
-                        }
-                    }
-                }
-                
-                return finish.every(f => f) ? safeSequence : null;
-            }
-        }
-
-        function runBankerSimpleExample() {
-            let banker = new BankerAlgorithmSimple(10);
-            banker.addProcess(2, 5);
-            banker.addProcess(3, 6);
-            banker.addProcess(1, 3);
-            
-            let sequence = banker.isSafeState();
-            return sequence ? 
-                `Estado seguro encontrado. Secuencia: ${sequence.join(' -> ')}` :
-                'Estado inseguro detectado';
-        }
-
-        class BankerAlgorithmMulti {
-            constructor(available, max, allocation) {
-                this.available = [...available];
-                this.max = max;
-                this.allocation = allocation;
-                this.numProcesses = max.length;
-                this.numResources = available.length;
-                this.need = this.calculateNeed();
-                this.log = [];
-            }
-
-            calculateNeed() {
-                let need = [];
-                for (let i = 0; i < this.numProcesses; i++) {
-                    need[i] = [];
-                    for (let j = 0; j < this.numResources; j++) {
-                        need[i][j] = this.max[i][j] - this.allocation[i][j];
-                    }
-                }
-                return need;
-            }
-
-            isSafeState() {
-                let work = [...this.available];
-                let finish = new Array(this.numProcesses).fill(false);
-                let safeSequence = [];
-
-                let count = 0;
-                while (count < this.numProcesses) {
-                    let found = false;
-                    for (let p = 0; p < this.numProcesses; p++) {
-                        if (!finish[p]) {
-                            let canExecute = true;
-                            for (let r = 0; r < this.numResources; r++) {
-                                if (this.need[p][r] > work[r]) {
-                                    canExecute = false;
-                                    break;
-                                }
-                            }
-
-                            if (canExecute) {
-                                for (let r = 0; r < this.numResources; r++) {
-                                    work[r] += this.allocation[p][r];
-                                }
-                                safeSequence.push(p);
-                                finish[p] = true;
-                                found = true;
-                                count++;
-                            }
-                        }
-                    }
-
-                    if (!found) {
-                        this.log.push("No se encontró una secuencia segura.");
-                        return null;
-                    }
-                }
-                this.log.push("Se encontró una secuencia segura.");
-                return safeSequence;
-            }
-
-            simulate() {
-                this.log = [];
-                this.log.push("Estado Inicial:");
-                this.log.push(`Available: [${this.available.join(', ')}]`);
-                this.log.push("Allocation:");
-                this.allocation.forEach((alloc, i) => this.log.push(`P${i}: [${alloc.join(', ')}]`));
-                this.log.push("Max:");
-                this.max.forEach((m, i) => this.log.push(`P${i}: [${m.join(', ')}]`));
-                this.log.push("Need:");
-                this.need.forEach((n, i) => this.log.push(`P${i}: [${n.join(', ')}]`));
-                
-                const sequence = this.isSafeState();
-                if (sequence) {
-                    this.log.push(`Secuencia segura: P${sequence.join(' -> P')}`);
-                } else {
-                    this.log.push("El sistema está en un estado inseguro.");
-                }
-                return this.log.join('\n');
-            }
-        }
-
-        function runBankerMultiExample() {
-            const available = [3, 3, 2];
-            const max = [
-                [7, 5, 3],
-                [3, 2, 2],
-                [9, 0, 2]
-            ];
-            const allocation = [
-                [0, 1, 0],
-                [2, 0, 0],
-                [3, 0, 2]
-            ];
-
-            let banker = new BankerAlgorithmMulti(available, max, allocation);
-            return banker.simulate();
-        }
-
-        class DiningPhilosophers {
-            constructor() {
-                this.forks = [true, true, true, true, true];
-                this.philosophers = ['Aristóteles', 'Platón', 'Sócrates', 'Kant', 'Descartes'];
-                this.log = [];
-            }
-            
-            canEat(philosopher) {
-                let leftFork = philosopher;
-                let rightFork = (philosopher + 1) % 5;
-                return this.forks[leftFork] && this.forks[rightFork];
-            }
-            
-            eat(philosopher) {
-                if (this.canEat(philosopher)) {
-                    let leftFork = philosopher;
-                    let rightFork = (philosopher + 1) % 5;
-                    
-                    this.forks[leftFork] = false;
-                    this.forks[rightFork] = false;
-                    
-                    this.log.push(`${this.philosophers[philosopher]} está comiendo`);
-                    
-                    setTimeout(() => {
-                        this.forks[leftFork] = true;
-                        this.forks[rightFork] = true;
-                        this.log.push(`${this.philosophers[philosopher]} terminó de comer`);
-                    }, 100);
-                    
-                    return true;
-                }
-                return false;
-            }
-            
-            simulate() {
-                this.log = [];
-                
-                for (let i = 0; i < 5; i++) {
-                    if (!this.eat(i)) {
-                        this.log.push(`${this.philosophers[i]} no puede comer (tenedores ocupados)`);
-                    }
-                }
-                
-                return this.log.join('\n');
-            }
-        }
-
-        function runPhilosophersExample() {
-            let dining = new DiningPhilosophers();
-            return dining.simulate();
-        }
-
-        class ReadersWriters {
-            constructor() {
-                this.readers = 0;
-                this.writing = false;
-                this.data = "Contenido inicial";
-                this.log = [];
-            }
-            
-            startReading(readerId) {
-                if (!this.writing) {
-                    this.readers++;
-                    this.log.push(`Lector ${readerId} comenzó a leer. Lectores activos: ${this.readers}`);
-                    this.log.push(`Lector ${readerId} lee: "${this.data}"`);
-                    return true;
-                } else {
-                    this.log.push(`Lector ${readerId} no puede leer (escritor activo)`);
-                    return false;
-                }
-            }
-            
-            stopReading(readerId) {
-                if (this.readers > 0) {
-                    this.readers--;
-                    this.log.push(`Lector ${readerId} terminó de leer. Lectores activos: ${this.readers}`);
-                }
-            }
-            
-            startWriting(writerId, newData) {
-                if (this.readers === 0 && !this.writing) {
-                    this.writing = true;
-                    this.data = newData;
-                    this.log.push(`Escritor ${writerId} escribió: "${newData}"`);
-                    return true;
-                } else {
-                    this.log.push(`Escritor ${writerId} no puede escribir (${this.readers} lectores o escritor activo)`);
-                    return false;
-                }
-            }
-            
-            stopWriting(writerId) {
-                this.writing = false;
-                this.log.push(`Escritor ${writerId} terminó de escribir`);
-            }
-            
-            simulate() {
-                this.log = [];
-                
-                this.startReading(1);
-                this.startReading(2);
-                this.startWriting(1, "Nuevo contenido");
-                this.stopReading(1);
-                this.stopReading(2);
-                this.startWriting(1, "Contenido actualizado");
-                this.stopWriting(1);
-                this.startReading(3);
-                this.stopReading(3);
-                
-                return this.log.join('\n');
-            }
-        }
-
-        function runReadersWritersExample() {
-            let rw = new ReadersWriters();
-            return rw.simulate();
-        }
-
-        class SleepingBarber {
-            constructor(waitingChairs = 5) {
-                this.waitingChairs = waitingChairs;
-                this.waitingCustomers = [];
-                this.barberSleeping = true;
-                this.cuttingHair = false;
-                this.log = [];
-            }
-            
-            customerArrives(customerId) {
-                this.log.push(`Cliente ${customerId} llega a la barbería`);
-                
-                if (this.barberSleeping) {
-                    this.barberSleeping = false;
-                    this.cuttingHair = true;
-                    this.log.push(`Cliente ${customerId} despierta al barbero y se sienta`);
-                    this.cutHair(customerId);
-                } else if (this.waitingCustomers.length < this.waitingChairs) {
-                    this.waitingCustomers.push(customerId);
-                    this.log.push(`Cliente ${customerId} espera. Cola: ${this.waitingCustomers.length}/${this.waitingChairs}`);
-                } else {
-                    this.log.push(`Cliente ${customerId} se va (no hay sillas disponibles)`);
-                }
-            }
-            
-            cutHair(customerId) {
-                this.log.push(`Barbero corta el cabello del cliente ${customerId}`);
-                
-                setTimeout(() => {
-                    this.log.push(`Cliente ${customerId} terminó su corte`);
-                    this.cuttingHair = false;
-                    
-                    if (this.waitingCustomers.length > 0) {
-                        let nextCustomer = this.waitingCustomers.shift();
-                        this.cuttingHair = true;
-                        this.log.push(`Siguiente cliente ${nextCustomer} se sienta`);
-                        this.cutHair(nextCustomer);
-                    } else {
-                        this.barberSleeping = true;
-                        this.log.push(`Barbero se duerme (no hay más clientes)`);
-                    }
-                }, 100);
-            }
-            
-            simulate() {
-                this.log = [];
-                this.waitingCustomers = [];
-                this.barberSleeping = true;
-                this.cuttingHair = false;
-                
-                this.customerArrives(1);
-                this.customerArrives(2);
-                this.customerArrives(3);
-                this.customerArrives(4);
-                this.customerArrives(5);
-                this.customerArrives(6);
-                this.customerArrives(7);
-                
-                return this.log.join('\n');
-            }
-        }
-
-        function runBarberExample() {
-            let barber = new SleepingBarber(3);
-            return barber.simulate();
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
