@@ -10,6 +10,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <dialog open id="miModal">
+  <h1>Escribe el correo electrónico asociado a tu cuenta:</h1>
+  <form class="pswd-form" method="dialog">
+    <form action="" method="post">
+      <input type="text" id="uname" name="uname" placeholder="Correo electrónico"><br>
+      <div>
+        <button>Salir</button>
+        <button>Enviar</button>
+      </div>
+      
+    </form>
+    
+  </form>
+</dialog>
     <div class="content">
         <h1 class="titulo-elecciones" style="margin-top: 0px;margin-bottom: 30px;">
             Ayúdanos a que puedas recuperar tu contraseña
@@ -22,6 +36,8 @@
         <a href="login.php"><h3 class="pswd-rec">Volver a Iniciar sesión</h3></a>
         <a href="index.php" class="volver-home">Volver al menú de inicio</a>
 </div>
+<!-- POP UP PARA PEDIR EL CORREO -->
+
 </body>
 <footer>
     <h2>Heyden Aldana - Héctor Funes - Bilander Fernández</h2>
