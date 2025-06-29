@@ -125,7 +125,17 @@ header {
   margin:0 ;
 }
 
-form {
+.pswd-rec {
+  text-decoration:none;font-size:20px;font-weight:410;color: #3E64FB;text-decoration: none;
+}
+.pswd-rec h3{
+  text-decoration:none;font-size:20px;font-weight:410;color: #3E64FB;text-decoration: none;
+}
+.volver-home{
+  text-decoration:none;font-size:20px;font-weight:410;color: #000000;
+}
+
+.login-form {
   width: 100%;
   border: 3px solid rgba(0, 0, 0, 0.3);
   background: #F7F7F7 ; 
@@ -137,7 +147,7 @@ form {
   text-align:left;
   justify-content: center;}
   
-input {    
+input {
    display: block;
    width: 90%;  
    background-color: #D9D9D9;
