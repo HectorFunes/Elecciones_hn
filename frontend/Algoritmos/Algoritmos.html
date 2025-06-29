@@ -38,7 +38,8 @@
         <div class="algorithm-container">
             <div class="tabs">
                 <button class="tab-button active" data-tab="avestruz">Algoritmo del Avestruz</button>
-                <button class="tab-button" data-tab="banquero">Algoritmo del Banquero</button>
+                <button class="tab-button" data-tab="banquero-simple">Algoritmo del Banquero (Recurso Único)</button>
+                <button class="tab-button" data-tab="banquero-multi">Algoritmo del Banquero (Múltiples Recursos)</button>
                 <button class="tab-button" data-tab="filosofos">Los Filósofos Comelones</button>
                 <button class="tab-button" data-tab="lectores">Problema de los Lectores Escritores</button>
                 <button class="tab-button" data-tab="barbero">Problema del Barbero Durmiente</button>
@@ -65,7 +66,6 @@
 let counter = 0;
 
 function increment() {
-    // Ignoramos deliberadamente las condiciones de carrera
     for (let i = 0; i < 1000; i++) {
         counter++;
     }
@@ -74,49 +74,50 @@ function increment() {
 function simulateRaceCondition() {
     counter = 0;
     
-    // Simulamos múltiples procesos incrementando el contador
     increment();
     increment();
     increment();
     
     return `Valor final del contador: ${counter}`;
 }</code></pre>
-                            <button class="run-button" onclick="runCode('avestruz')">Ejecutar</button>
-                            <div class="console" id="console-avestruz">
-                                <div class="console-header">Consola</div>
-                                <div class="console-output">Presiona 'Ejecutar' para ver el resultado</div>
+                        </div>
+                        <div class="console" id="console-avestruz">
+                            <div class="console-header">Consola</div>
+                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
+                            <div class="console-input-container">
+                                <span>$</span>
+                                <input type="text" class="console-input" data-target="avestruz" placeholder="Escribe /run o /clear">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="tab-content" id="banquero">
+                <div class="tab-content" id="banquero-simple">
                     <div class="content-left">
-                        <h3>Algoritmo del Banquero</h3>
+                        <h3>Algoritmo del Banquero (Recurso Único)</h3>
                         <p>El algoritmo del banquero es una técnica de prevención de interbloqueos desarrollada por Edsger Dijkstra. Su nombre proviene de la analogía con un banquero que debe decidir si otorgar préstamos a clientes basándose en si podrá recuperar el dinero.</p>
                         
                         <p>El algoritmo funciona manteniendo el sistema en un "estado seguro", donde existe al menos una secuencia de ejecución que permite que todos los procesos terminen sin interbloqueo.</p>
                         
-                        <p><strong>Para un solo recurso:</strong> Se verifica si otorgar el recurso mantiene el sistema en estado seguro.</p>
-                        <p><strong>Para varios recursos:</strong> Se usa una matriz de asignación y necesidades para determinar la seguridad del estado.</p>
+                        <p><strong>Para un solo recurso:</strong> Se verifica si otorgar el recurso mantiene el sistema en estado seguro. Es una versión simplificada donde solo hay una cantidad total de un tipo de recurso.</p>
                         
                         <p>Es conservador pero efectivo para prevenir interbloqueos en sistemas con recursos limitados.</p>
                     </div>
                     <div class="content-right">
                         <div class="code-container">
-                            <pre><code id="code-banquero">// Algoritmo del Banquero - Versión simplificada para un recurso
-class BankerAlgorithm {
+                            <pre><code id="code-banquero-simple">// Algoritmo del Banquero - Versión simplificada para un recurso
+class BankerAlgorithmSimple {
     constructor(totalResources) {
         this.total = totalResources;
-        this.allocated = [];
-        this.max = [];
-        this.available = totalResources;
+        this.allocated = []; // Recursos asignados a cada proceso
+        this.max = [];       // Máximo de recursos que cada proceso necesita
+        this.available = totalResources; // Recursos disponibles
     }
     
     addProcess(allocated, max) {
         this.allocated.push(allocated);
         this.max.push(max);
-        this.available -= allocated;
+        this.available -= allocated; // Reducir disponibles por lo ya asignado
     }
     
     isSafeState() {
@@ -124,36 +125,176 @@ class BankerAlgorithm {
         let finish = new Array(this.allocated.length).fill(false);
         let safeSequence = [];
         
-        for (let i = 0; i < this.allocated.length; i++) {
-            for (let j = 0; j < this.allocated.length; j++) {
-                if (!finish[j] && (this.max[j] - this.allocated[j]) <= work) {
-                    work += this.allocated[j];
-                    finish[j] = true;
-                    safeSequence.push(j);
-                    break;
+        let found = true;
+        while (found) {
+            found = false;
+            for (let i = 0; i < this.allocated.length; i++) {
+                // Si el proceso no ha terminado y su necesidad es menor o igual a 'work'
+                if (!finish[i] && (this.max[i] - this.allocated[i]) <= work) {
+                    work += this.allocated[i]; // Liberar recursos
+                    finish[i] = true;
+                    safeSequence.push(i);
+                    found = true;
                 }
             }
         }
         
+        // Si todos los procesos terminaron, el estado es seguro
         return finish.every(f => f) ? safeSequence : null;
     }
 }
 
-function runBankerExample() {
-    let banker = new BankerAlgorithm(10);
-    banker.addProcess(2, 5);  // Proceso 0: asignado 2, máximo 5
-    banker.addProcess(3, 6);  // Proceso 1: asignado 3, máximo 6
-    banker.addProcess(1, 3);  // Proceso 2: asignado 1, máximo 3
+function runBankerSimpleExample() {
+    let banker = new BankerAlgorithmSimple(10); // Total de 10 unidades de recurso
+    banker.addProcess(2, 5);  // Proceso 0: asignado 2, máximo 5 (necesita 3 más)
+    banker.addProcess(3, 6);  // Proceso 1: asignado 3, máximo 6 (necesita 3 más)
+    banker.addProcess(1, 3);  // Proceso 2: asignado 1, máximo 3 (necesita 2 más)
     
     let sequence = banker.isSafeState();
     return sequence ? 
         `Estado seguro encontrado. Secuencia: ${sequence.join(' -> ')}` :
         'Estado inseguro detectado';
 }</code></pre>
-                            <button class="run-button" onclick="runCode('banquero')">Ejecutar</button>
-                            <div class="console" id="console-banquero">
-                                <div class="console-header">Consola</div>
-                                <div class="console-output">Presiona 'Ejecutar' para ver el resultado</div>
+                        </div>
+                        <div class="console" id="console-banquero-simple">
+                            <div class="console-header">Consola</div>
+                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
+                            <div class="console-input-container">
+                                <span>$</span>
+                                <input type="text" class="console-input" data-target="banquero-simple" placeholder="Escribe /run o /clear">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="banquero-multi">
+                    <div class="content-left">
+                        <h3>Algoritmo del Banquero (Múltiples Recursos)</h3>
+                        <p>Esta es una extensión del algoritmo del banquero que maneja múltiples tipos de recursos, por ejemplo, A, B y C. Requiere un seguimiento más complejo de los recursos disponibles, asignados y las necesidades máximas de cada proceso.</p>
+                        
+                        <p><strong>Componentes clave:</strong></p>
+                        <ul>
+                            <li>**Available (Vector):** Número de instancias disponibles de cada tipo de recurso.</li>
+                            <li>**Max (Matriz):** Número máximo de instancias de cada recurso que cada proceso puede solicitar.</li>
+                            <li>**Allocation (Matriz):** Número de instancias de cada recurso actualmente asignadas a cada proceso.</li>
+                            <li>**Need (Matriz):** Número restante de instancias de cada recurso que cada proceso aún necesita. `Need[i][j] = Max[i][j] - Allocation[i][j]`.</li>
+                        </ul>
+                        
+                        <p>El algoritmo verifica si el sistema puede encontrar una secuencia segura de procesos para los cuales, si se les conceden sus recursos restantes, pueden completar sus tareas y liberar sus recursos, permitiendo que el siguiente proceso en la secuencia se complete, y así sucesivamente.</p>
+                        <p>Si existe al menos una secuencia segura, el estado es seguro; de lo contrario, es inseguro y se previene la asignación que conduciría a un interbloqueo.</p>
+                    </div>
+                    <div class="content-right">
+                        <div class="code-container">
+                            <pre><code id="code-banquero-multi">// Algoritmo del Banquero - Múltiples Recursos
+class BankerAlgorithmMulti {
+    constructor(available, max, allocation) {
+        this.available = [...available]; // Vector de recursos disponibles
+        this.max = max;                   // Matriz Max (proceso x recurso)
+        this.allocation = allocation;     // Matriz Allocation (proceso x recurso)
+        this.numProcesses = max.length;
+        this.numResources = available.length;
+        this.need = this.calculateNeed(); // Matriz Need
+        this.log = [];
+    }
+
+    calculateNeed() {
+        let need = [];
+        for (let i = 0; i < this.numProcesses; i++) {
+            need[i] = [];
+            for (let j = 0; j < this.numResources; j++) {
+                need[i][j] = this.max[i][j] - this.allocation[i][j];
+            }
+        }
+        return need;
+    }
+
+    isSafeState() {
+        let work = [...this.available];
+        let finish = new Array(this.numProcesses).fill(false);
+        let safeSequence = [];
+
+        let count = 0;
+        while (count < this.numProcesses) {
+            let found = false;
+            for (let p = 0; p < this.numProcesses; p++) {
+                if (!finish[p]) {
+                    let canExecute = true;
+                    for (let r = 0; r < this.numResources; r++) {
+                        if (this.need[p][r] > work[r]) {
+                            canExecute = false;
+                            break;
+                        }
+                    }
+
+                    if (canExecute) {
+                        for (let r = 0; r < this.numResources; r++) {
+                            work[r] += this.allocation[p][r];
+                        }
+                        safeSequence.push(p);
+                        finish[p] = true;
+                        found = true;
+                        count++;
+                    }
+                }
+            }
+
+            if (!found) {
+                this.log.push("No se encontró una secuencia segura.");
+                return null;
+            }
+        }
+        this.log.push("Se encontró una secuencia segura.");
+        return safeSequence;
+    }
+
+    simulate() {
+        this.log = [];
+        this.log.push("Estado Inicial:");
+        this.log.push(`Available: [${this.available.join(', ')}]`);
+        this.log.push("Allocation:");
+        this.allocation.forEach((alloc, i) => this.log.push(`P${i}: [${alloc.join(', ')}]`));
+        this.log.push("Max:");
+        this.max.forEach((m, i) => this.log.push(`P${i}: [${m.join(', ')}]`));
+        this.log.push("Need:");
+        this.need.forEach((n, i) => this.log.push(`P${i}: [${n.join(', ')}]`));
+        
+        const sequence = this.isSafeState();
+        if (sequence) {
+            this.log.push(`Secuencia segura: P${sequence.join(' -> P')}`);
+        } else {
+            this.log.push("El sistema está en un estado inseguro.");
+        }
+        return this.log.join('\n');
+    }
+}
+
+function runBankerMultiExample() {
+    // Ejemplo de un sistema con 3 tipos de recursos (A, B, C)
+    // P0, P1, P2 son procesos
+    const available = [3, 3, 2]; // Instancias disponibles de A, B, C
+
+    const max = [ // Necesidades máximas de cada proceso
+        [7, 5, 3], // P0
+        [3, 2, 2], // P1
+        [9, 0, 2]  // P2
+    ];
+
+    const allocation = [ // Recursos actualmente asignados a cada proceso
+        [0, 1, 0], // P0
+        [2, 0, 0], // P1
+        [3, 0, 2]  // P2
+    ];
+
+    let banker = new BankerAlgorithmMulti(available, max, allocation);
+    return banker.simulate();
+}</code></pre>
+                        </div>
+                        <div class="console" id="console-banquero-multi">
+                            <div class="console-header">Consola</div>
+                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
+                            <div class="console-input-container">
+                                <span>$</span>
+                                <input type="text" class="console-input" data-target="banquero-multi" placeholder="Escribe /run o /clear">
                             </div>
                         </div>
                     </div>
@@ -201,7 +342,6 @@ class DiningPhilosophers {
             
             this.log.push(`${this.philosophers[philosopher]} está comiendo`);
             
-            // Simular tiempo comiendo
             setTimeout(() => {
                 this.forks[leftFork] = true;
                 this.forks[rightFork] = true;
@@ -216,14 +356,13 @@ class DiningPhilosophers {
     simulate() {
         this.log = [];
         
-        // Intentar que cada filósofo coma
         for (let i = 0; i < 5; i++) {
             if (!this.eat(i)) {
                 this.log.push(`${this.philosophers[i]} no puede comer (tenedores ocupados)`);
             }
         }
         
-        return this.log.join('\\n');
+        return this.log.join('\n');
     }
 }
 
@@ -231,10 +370,13 @@ function runPhilosophersExample() {
     let dining = new DiningPhilosophers();
     return dining.simulate();
 }</code></pre>
-                            <button class="run-button" onclick="runCode('filosofos')">Ejecutar</button>
-                            <div class="console" id="console-filosofos">
-                                <div class="console-header">Consola</div>
-                                <div class="console-output">Presiona 'Ejecutar' para ver el resultado</div>
+                        </div>
+                        <div class="console" id="console-filosofos">
+                            <div class="console-header">Consola</div>
+                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
+                            <div class="console-input-container">
+                                <span>$</span>
+                                <input type="text" class="console-input" data-target="filosofos" placeholder="Escribe /run o /clear">
                             </div>
                         </div>
                     </div>
@@ -307,7 +449,6 @@ class ReadersWriters {
     simulate() {
         this.log = [];
         
-        // Simular secuencia de operaciones
         this.startReading(1);
         this.startReading(2);
         this.startWriting(1, "Nuevo contenido");
@@ -318,7 +459,7 @@ class ReadersWriters {
         this.startReading(3);
         this.stopReading(3);
         
-        return this.log.join('\\n');
+        return this.log.join('\n');
     }
 }
 
@@ -326,10 +467,13 @@ function runReadersWritersExample() {
     let rw = new ReadersWriters();
     return rw.simulate();
 }</code></pre>
-                            <button class="run-button" onclick="runCode('lectores')">Ejecutar</button>
-                            <div class="console" id="console-lectores">
-                                <div class="console-header">Consola</div>
-                                <div class="console-output">Presiona 'Ejecutar' para ver el resultado</div>
+                        </div>
+                        <div class="console" id="console-lectores">
+                            <div class="console-header">Consola</div>
+                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
+                            <div class="console-input-container">
+                                <span>$</span>
+                                <input type="text" class="console-input" data-target="lectores" placeholder="Escribe /run o /clear">
                             </div>
                         </div>
                     </div>
@@ -383,7 +527,6 @@ class SleepingBarber {
     cutHair(customerId) {
         this.log.push(`Barbero corta el cabello del cliente ${customerId}`);
         
-        // Simular corte de cabello
         setTimeout(() => {
             this.log.push(`Cliente ${customerId} terminó su corte`);
             this.cuttingHair = false;
@@ -406,16 +549,15 @@ class SleepingBarber {
         this.barberSleeping = true;
         this.cuttingHair = false;
         
-        // Simular llegada de clientes
         this.customerArrives(1);
         this.customerArrives(2);
         this.customerArrives(3);
         this.customerArrives(4);
         this.customerArrives(5);
         this.customerArrives(6);
-        this.customerArrives(7); // Este debería irse
+        this.customerArrives(7);
         
-        return this.log.join('\\n');
+        return this.log.join('\n');
     }
 }
 
@@ -423,10 +565,13 @@ function runBarberExample() {
     let barber = new SleepingBarber(3);
     return barber.simulate();
 }</code></pre>
-                            <button class="run-button" onclick="runCode('barbero')">Ejecutar</button>
-                            <div class="console" id="console-barbero">
-                                <div class="console-header">Consola</div>
-                                <div class="console-output">Presiona 'Ejecutar' para ver el resultado</div>
+                        </div>
+                        <div class="console" id="console-barbero">
+                            <div class="console-header">Consola</div>
+                            <div class="console-output">Escribe /run para ejecutar el codigo, y presiona Enter.</div>
+                            <div class="console-input-container">
+                                <span>$</span>
+                                <input type="text" class="console-input" data-target="barbero" placeholder="Escribe /run o /clear">
                             </div>
                         </div>
                     </div>
@@ -464,21 +609,53 @@ function runBarberExample() {
                 
                 this.classList.add('active');
                 document.getElementById(targetTab).classList.add('active');
+
+                // Limpiar y resetear la consola al cambiar de pestaña
+                const currentConsoleInput = document.querySelector(`#console-${targetTab} .console-input`);
+                const currentConsoleOutput = document.querySelector(`#console-${targetTab} .console-output`);
+                if (currentConsoleOutput) {
+                    currentConsoleOutput.textContent = "Escribe /run para ejecutar el codigo, y presiona Enter.";
+                }
+                if (currentConsoleInput) {
+                    currentConsoleInput.value = "";
+                    currentConsoleInput.focus();
+                }
             });
         });
 
-        // Función para ejecutar código
-        function runCode(algorithm) {
-            const consoleOutput = document.querySelector(`#console-${algorithm} .console-output`);
-            
+        // Funcionalidad de la consola interactiva
+        document.querySelectorAll('.console-input').forEach(input => {
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    const command = this.value.trim();
+                    const algorithmId = this.dataset.target;
+                    const consoleOutput = document.querySelector(`#console-${algorithmId} .console-output`);
+                    
+                    if (command === '/run') {
+                        executeAlgorithmCode(algorithmId, consoleOutput);
+                    } else if (command === '/clear') {
+                        consoleOutput.textContent = "";
+                    } else {
+                        consoleOutput.textContent = "ERROR: comando no válido";
+                    }
+                    this.value = '';
+                }
+            });
+        });
+
+        function executeAlgorithmCode(algorithm, consoleOutputElement) {
             try {
                 let result;
                 switch(algorithm) {
                     case 'avestruz':
                         result = simulateRaceCondition();
                         break;
-                    case 'banquero':
-                        result = runBankerExample();
+                    case 'banquero-simple':
+                        result = runBankerSimpleExample();
+                        break;
+                    case 'banquero-multi':
+                        result = runBankerMultiExample();
                         break;
                     case 'filosofos':
                         result = runPhilosophersExample();
@@ -493,13 +670,12 @@ function runBarberExample() {
                         result = 'Algoritmo no encontrado';
                 }
                 
-                consoleOutput.textContent = result;
+                consoleOutputElement.textContent = result;
             } catch (error) {
-                consoleOutput.textContent = `Error: ${error.message}`;
+                consoleOutputElement.textContent = `Error al ejecutar: ${error.message}`;
             }
         }
 
-        // Funciones de los algoritmos
         let counter = 0;
 
         function increment() {
@@ -516,7 +692,7 @@ function runBarberExample() {
             return `Valor final del contador: ${counter}`;
         }
 
-        class BankerAlgorithm {
+        class BankerAlgorithmSimple {
             constructor(totalResources) {
                 this.total = totalResources;
                 this.allocated = [];
@@ -535,13 +711,15 @@ function runBarberExample() {
                 let finish = new Array(this.allocated.length).fill(false);
                 let safeSequence = [];
                 
-                for (let i = 0; i < this.allocated.length; i++) {
-                    for (let j = 0; j < this.allocated.length; j++) {
-                        if (!finish[j] && (this.max[j] - this.allocated[j]) <= work) {
-                            work += this.allocated[j];
-                            finish[j] = true;
-                            safeSequence.push(j);
-                            break;
+                let found = true;
+                while (found) {
+                    found = false;
+                    for (let i = 0; i < this.allocated.length; i++) {
+                        if (!finish[i] && (this.max[i] - this.allocated[i]) <= work) {
+                            work += this.allocated[i];
+                            finish[i] = true;
+                            safeSequence.push(i);
+                            found = true;
                         }
                     }
                 }
@@ -550,8 +728,8 @@ function runBarberExample() {
             }
         }
 
-        function runBankerExample() {
-            let banker = new BankerAlgorithm(10);
+        function runBankerSimpleExample() {
+            let banker = new BankerAlgorithmSimple(10);
             banker.addProcess(2, 5);
             banker.addProcess(3, 6);
             banker.addProcess(1, 3);
@@ -560,6 +738,105 @@ function runBarberExample() {
             return sequence ? 
                 `Estado seguro encontrado. Secuencia: ${sequence.join(' -> ')}` :
                 'Estado inseguro detectado';
+        }
+
+        class BankerAlgorithmMulti {
+            constructor(available, max, allocation) {
+                this.available = [...available];
+                this.max = max;
+                this.allocation = allocation;
+                this.numProcesses = max.length;
+                this.numResources = available.length;
+                this.need = this.calculateNeed();
+                this.log = [];
+            }
+
+            calculateNeed() {
+                let need = [];
+                for (let i = 0; i < this.numProcesses; i++) {
+                    need[i] = [];
+                    for (let j = 0; j < this.numResources; j++) {
+                        need[i][j] = this.max[i][j] - this.allocation[i][j];
+                    }
+                }
+                return need;
+            }
+
+            isSafeState() {
+                let work = [...this.available];
+                let finish = new Array(this.numProcesses).fill(false);
+                let safeSequence = [];
+
+                let count = 0;
+                while (count < this.numProcesses) {
+                    let found = false;
+                    for (let p = 0; p < this.numProcesses; p++) {
+                        if (!finish[p]) {
+                            let canExecute = true;
+                            for (let r = 0; r < this.numResources; r++) {
+                                if (this.need[p][r] > work[r]) {
+                                    canExecute = false;
+                                    break;
+                                }
+                            }
+
+                            if (canExecute) {
+                                for (let r = 0; r < this.numResources; r++) {
+                                    work[r] += this.allocation[p][r];
+                                }
+                                safeSequence.push(p);
+                                finish[p] = true;
+                                found = true;
+                                count++;
+                            }
+                        }
+                    }
+
+                    if (!found) {
+                        this.log.push("No se encontró una secuencia segura.");
+                        return null;
+                    }
+                }
+                this.log.push("Se encontró una secuencia segura.");
+                return safeSequence;
+            }
+
+            simulate() {
+                this.log = [];
+                this.log.push("Estado Inicial:");
+                this.log.push(`Available: [${this.available.join(', ')}]`);
+                this.log.push("Allocation:");
+                this.allocation.forEach((alloc, i) => this.log.push(`P${i}: [${alloc.join(', ')}]`));
+                this.log.push("Max:");
+                this.max.forEach((m, i) => this.log.push(`P${i}: [${m.join(', ')}]`));
+                this.log.push("Need:");
+                this.need.forEach((n, i) => this.log.push(`P${i}: [${n.join(', ')}]`));
+                
+                const sequence = this.isSafeState();
+                if (sequence) {
+                    this.log.push(`Secuencia segura: P${sequence.join(' -> P')}`);
+                } else {
+                    this.log.push("El sistema está en un estado inseguro.");
+                }
+                return this.log.join('\n');
+            }
+        }
+
+        function runBankerMultiExample() {
+            const available = [3, 3, 2];
+            const max = [
+                [7, 5, 3],
+                [3, 2, 2],
+                [9, 0, 2]
+            ];
+            const allocation = [
+                [0, 1, 0],
+                [2, 0, 0],
+                [3, 0, 2]
+            ];
+
+            let banker = new BankerAlgorithmMulti(available, max, allocation);
+            return banker.simulate();
         }
 
         class DiningPhilosophers {
