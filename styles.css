@@ -1,0 +1,224 @@
+@font-face {
+    font-family: 'Fredoka'; 
+    src: url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+}
+
+body {
+  background: #F7F7F7;
+  margin: 0;
+  font-family: 'Fredoka';
+}
+
+.content {
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #F7F7F7;
+  padding: 10px;
+  text-align: center;
+}
+
+.accede-aqui{
+  margin: 0px;
+  font-family:'Fredoka';
+  font-weight:300;
+  text-decoration: underline;
+}
+
+.titulo-elecciones{
+  font-family: 'Fredoka';
+  font-weight: 401;
+  font-size: 50px;
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
+body h2{
+  margin:0px;
+  font-family:'Fredoka';
+  font-weight: lighter;
+}
+
+h1{
+  margin:0px;
+  font-family:'Fredoka';
+  font-weight: lighter;
+}
+
+.btn-start{
+  background-color: #929AAB;
+  color: #000;
+  border: none; 
+  border-radius: 25px; 
+  padding: 10px 20px;
+  font-family: 'Fredoka';
+  font-size: 50px;
+  font-weight: 425;
+  padding: auto;
+}
+
+footer{
+  background:#393E46;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+}
+
+footer h2{
+  color:#EEEEEE;
+}
+
+/*Procesos*/
+header {
+  background-color: #EEEEEE;
+}
+
+.navbar {
+  max-width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: space-around;
+}
+
+.nav-links li {
+  margin: 0;
+}
+
+.nav-links a {
+  font-family:'Fredoka';
+  font-weight: 380;
+  display: block;
+  padding: 15px 20px;
+  color: black;
+  text-decoration:none;
+}
+
+.nav-links a:hover {
+  background-color: #929aab;
+  text-decoration:underline;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr;    
+  gap: 10px;                      
+  width: 100%;                   
+  height: 400px;
+  margin: 20px auto;
+}
+
+.pasos div {
+  color: black;
+  font-size: 2rem;
+  font-weight: 300;
+  padding-left: 30px;
+}
+
+.pasos h3{
+  font-size:20px;
+  font-weight: 300;
+  margin:0 ;
+}
+
+.pswd-rec {
+  text-decoration:none;font-size:20px;font-weight:410;color: #3E64FB;text-decoration: none;
+}
+.pswd-rec h3{
+  text-decoration:none;font-size:20px;font-weight:410;color: #3E64FB;text-decoration: none;
+}
+.volver-home{
+  text-decoration:none;font-size:20px;font-weight:410;color: #000000;
+}
+
+.login-form {
+  width: 100%;
+  border: 3px solid rgba(0, 0, 0, 0.3);
+  background: #F7F7F7 ; 
+  border-radius: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  text-align:left;
+  justify-content: center;}
+  
+input {
+   display: block;
+   width: 90%;  
+   background-color: #D9D9D9;
+   color: rgba(0, 0, 0, 0.6);
+   border-color: #D9D9D9;
+   padding: 10px;    
+   margin-top: 5px;
+   margin-left: 20px;
+   font-family:'Fredoka';
+   font-weight: 410;
+   font-size: 18px;}
+    
+label {    
+  color: #000000;    
+  font-size: 24px;    
+  padding: 20px;
+  margin-left:5px;
+  font-family:'Fredoka';
+  font-weight: 410;}
+      
+button {
+  display: block;
+  margin: 25px auto 10px auto;
+  padding: 10px 65px 10px 65px;
+  background-color: #929AAB;
+  border-color: #929AAB;
+  color: #000000;
+  border-radius: 15px;
+  font-family:'Fredoka';
+  font-weight: 410;
+  font-size: 36px;
+}
+        
+button:hover{    
+  opacity: .10;}
+
+.error {   
+  background: #F2DEDE;   
+  color: #0c0101;   
+  padding: 10px;   
+  width: 95%;  
+  border-radius: 5px;   
+  margin: 20px auto;}
+
+ dialog{
+  position: fixed;               /* importante: que sea fijo */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  max-width: 90%;
+  margin:0;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8); /* fondo oscuro detrás */
+}
+
+#miModal{
+  margin: auto;
+}
+
+.pswd-form div{
+  display: flex;
+}
+
+.pswd-form button{
+  font-size: medium;
+  margin-top: 5px;
+}
