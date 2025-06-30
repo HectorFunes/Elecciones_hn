@@ -21,25 +21,24 @@
       </nav>
     </header>
     <div class="content">
-    <h1 class="titulo-elecciones" style="margin-top: 30px;margin-bottom: 40px;">
-        Elecciones Generales 2025
+        <br>
+    <h1>
+        Antes de comenzar, debe ingresar la siguiente información para validar su voto. Esto lo ayuda a usted y al pueblo a hacer este proceso más transparente.
     </h1>
-  <form class="login-form" action="" method="post">
+  <form style="border-color:transparent;" class="login-form" action="#" method="post">
 
     <?php if (isset($_GET['error'])) { ?>
       <p class="error"><?php echo $_GET['error']; ?></p>
     <?php } ?>
 
-    <label for="uname">Ingrese su correo electrónico</label>
-    <input type="text" id="uname" name="uname" placeholder="Correo electrónico"><br>
-
-    <label for="password">Ingrese su contraseña</label>
-    <input type="password" id="password" name="password" placeholder="• • • • • • • • • •"><br>
-
-    <button type="submit">Entrar</button>
+    <label for="uname">Ingrese su DNI:
+        <input type="text" id="uname" name="uname" placeholder="DNI"><br>
+    </label>
+    <label for="password">Ingrese su nombre:
+        <input type="text" id="uname" name="uname" placeholder="Nombre"><br>
+    </label>
+    <button type="submit">Empezar</button>
   </form>
-  <a href="recuperarContrasena.php" ><h3 class="pswd-rec">Recuperar Contraseña</h3></a>
-  <a href="index.php" class="volver-home">Volver al menú de inicio</a>
 </div>
 
 </body>

@@ -10,6 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.php">Inicio</a></li>
+          <li><a href="proceso.php">Proceso de Votación</a></li>
+          <li><a href="faq.html">Preguntas Frecuentes</a></li>
+          <li><a href="frontend/Algoritmos/Algoritmos.html">Algoritmos</a></li>
+        </ul>
+      </nav>
+    </header>
   <dialog open id="miModal">
   <h1>Escribe el correo electrónico asociado a tu cuenta:</h1>
   <form class="pswd-form" method="dialog">

@@ -107,9 +107,9 @@ header {
   grid-template-columns: 1fr 1fr; 
   grid-template-rows: 1fr 1fr;    
   gap: 10px;                      
-  width: 100%;                   
+  width: 90%;                   
   height: 400px;
-  margin: 20px auto;
+  margin: 20px auto 20px auto;
 }
 
 .pasos div {
@@ -172,17 +172,22 @@ button {
   display: block;
   margin: 25px auto 10px auto;
   padding: 10px 65px 10px 65px;
-  background-color: #929AAB;
-  border-color: #929AAB;
-  color: #000000;
+  background-color: #FF5722;
+  border-color: #FF5722;
+  color: #EEEEEE;
   border-radius: 15px;
   font-family:'Fredoka';
   font-weight: 410;
   font-size: 36px;
 }
+
+a{
+  color: #EEEEEE;
+  text-decoration: none;
+}
         
 button:hover{    
-  opacity: .10;}
+  opacity: .50;}
 
 .error {   
   background: #F2DEDE;   
@@ -221,4 +226,16 @@ dialog::backdrop {
 .pswd-form button{
   font-size: medium;
   margin-top: 5px;
+}
+
+.q-div h1{
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.q-div h2{
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
